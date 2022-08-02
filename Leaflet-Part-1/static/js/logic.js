@@ -24,7 +24,19 @@ function createFeatures(earthquakeData) {
   // Send our earthquakes layer to the createMap function/
   createMap(earthquakes);
 }
+function markerSize(mag) {
+    return mag;
+  }
 
+for (var i = 0; i < features.length; i++) {
+    L.circle(features[i].geometry.coordinates, {
+      fillOpacity: 0.75,
+      color: "white",
+      fillColor: "red",
+      // Setting our circle's radius to equal the output of our markerSize() function:
+      radius: markerSize(features[i].mag)
+    }).bindPopup(`<h1>${features[i].place}</h1> <hr> <h3>Magnitude: ${features[i].mag.toLocaleString()}</h3>`).addTo(myMap);
+  }
 function createMap(earthquakes) {
 
     // Create the base layers.
