@@ -84,30 +84,27 @@ function createFeatures(earthquakeData) {
       // Create our map, giving it the streetmap and earthquakes layers to display on load.
 var myMap = L.map("map", {
     center: [
-      37.09, -95.71
+      64.9, -18.71
     ],
     zoom: 5,
     layers: [street, earthquakes]
-});
+  });
 
-// function markerSize(mag) {
-//     return mag;
-// };
-    // function onEachFeature(feature, layer) {   
-    // // for (var i = 0; i < features.length; i++) {
-    //     L.circle(feature.geometry.coordinates, {
-    //     fillOpacity: 0.75,
-    //     color: "white",
-    //     fillColor: "red",
-    //     // Setting our circle's radius to equal the output of our markerSize() function:
-    //     radius: markerSize(feature.properties.mag)
-    //     })
-    // };
-  // Create a layer control.
-  // Pass it our baseMaps and overlayMaps.
-  // Add the layer control to the map.
-//   L.control.layers(baseMaps, overlayMaps, {
-//     collapsed: false
-//   }).addTo(myMap);
+var legend = L.control({position: "bottomright"});
+
+legend.onAdd = function(myMap) {
+  var div = L.DomUtil.create("div", "legend");
+  div.innerHTML += '<i style="background: #bfff00"></i><p>Magnitude: less than 2</p>';
+  div.innerHTML += '<i style="background: #ffbf00"></i><p>Magnitude: 2 - 3</p>';
+  div.innerHTML += '<i style="background: #ff8000"></i><p>Magnitude: 3 - 4</p>';
+  div.innerHTML += '<i style="background: #ff4000"></i><p>Magnitude: 4 - 5</p>';
+  div.innerHTML += '<i style="background: #ff0000"></i><p>Magnitude: greater than 5</p>';
+
+  return div;
+
+  
+  }; 
+  legend.addTo(myMap);
+
 
 }
